@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'org.tensorflow.lite.codelabs.digitclassifier'
+    compileSdkVersion 35
+    defaultConfig {
+        applicationId "org.tensorflow.lite.codelabs.digitclassifier"
+        minSdkVersion 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+// Sanity check if you have trained and downloaded TF Lite model.
+preBuild.doFirst {
+    assert file("./src/main/assets/mnist.tflite").exists() :
+            "mnist.tflite not found. Make sure you have trained and " +
+                    "downloaded your TensorFlow Lite model to assets/ folder"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
+
+    // Support Libraries
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+
+    // AndroidDraw Library
+    implementation 'com.github.divyanshub024:AndroidDraw:v0.1'
+
+    // Task API
+    implementation "com.google.android.gms:play-services-tasks:18.3.0"
+
+    // Add TF Lite
+    implementation 'org.tensorflow:tensorflow-lite:2.17.0'
+
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.3'
+}

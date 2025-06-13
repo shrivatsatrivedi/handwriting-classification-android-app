@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <string name="app_name" translatable="false">Digit Classifier</string>
+    <string name="classification_error_message" translatable="false">Error classifying drawing: %s</string>
+    <string name="clear_button_text" translatable="false">Clear</string>
+    <string name="prediction_text_placeholder" translatable="false">Please draw a digit</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+</resources>
